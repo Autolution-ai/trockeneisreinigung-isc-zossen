@@ -1,49 +1,30 @@
-import { Award, MapPin, Snowflake, Globe } from "lucide-react";
-
 const items = [
-  {
-    icon: Award,
-    label: "ISO 9001",
-    sub: "Zertifiziert",
-  },
-  {
-    icon: Snowflake,
-    label: "Eigenproduktion",
-    sub: "Trockeneis 24/7",
-  },
-  {
-    icon: Globe,
-    label: "Bundesweit",
-    sub: "Berlin & überregional",
-  },
-  {
-    icon: MapPin,
-    label: "Zossen bei Berlin",
-    sub: "Seit über 10 Jahren",
-  },
+  "ISO 9001 Zertifiziert",
+  "Eigenproduktion Trockeneis",
+  "Bundesweit tätig",
+  "IceTech-Partner",
+  "KAESER Kompressoren",
+  "Trockeneis 24 / 7",
+  "Maschinenverkauf & Vermietung",
+  "Über 10 Jahre Erfahrung",
 ];
 
 export default function TrustBar() {
+  const track = [...items, ...items];
+
   return (
-    <section className="bg-white border-b border-steel-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-steel-100">
-          {items.map(({ icon: Icon, label, sub }) => (
-            <div
-              key={label}
-              className="flex items-center gap-3 py-5 px-6"
-            >
-              <div className="w-9 h-9 rounded-lg bg-ice-100 flex items-center justify-center flex-shrink-0">
-                <Icon size={18} className="text-ice-500" />
-              </div>
-              <div>
-                <div className="text-sm font-bold text-navy-900">{label}</div>
-                <div className="text-xs text-steel-500">{sub}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="bg-navy-950 border-y border-white/6 overflow-hidden py-3">
+      <div className="flex animate-marquee">
+        {track.map((item, i) => (
+          <span
+            key={i}
+            className="flex items-center gap-5 whitespace-nowrap text-xs font-semibold text-steel-400 uppercase tracking-widest px-8"
+          >
+            <span className="w-1 h-1 rounded-full bg-ice-500 flex-shrink-0" />
+            {item}
+          </span>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
