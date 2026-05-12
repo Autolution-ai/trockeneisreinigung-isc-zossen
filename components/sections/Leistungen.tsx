@@ -26,8 +26,8 @@ export default function Leistungen() {
             Alles aus einer Hand.
           </h2>
           <p className="mt-4 text-steel-600 leading-relaxed">
-            Von der Trockeneisreinigung bis zur Maschinenvermietung — wir bieten das
-            breiteste Strahlverfahren-Portfolio in der Region.
+            Trockeneisreinigung, Sandstrahlen, Soda, Sponge-Jet, Maschinenverkauf und
+            Vermietung. Das breiteste Strahlverfahren-Portfolio in der Region.
           </p>
         </div>
 

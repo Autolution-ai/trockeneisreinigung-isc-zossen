@@ -22,8 +22,8 @@ export default function Einsatzgebiete() {
             Wo wir reinigen.
           </h2>
           <p className="mt-4 text-steel-600 leading-relaxed">
-            Trockeneisstrahlen eignet sich für nahezu jede Branche. Von der
-            Lebensmittelindustrie bis zum Oldtimer — wir haben die passende Lösung.
+            Trockeneisstrahlen funktioniert in nahezu jeder Branche: Lebensmittel,
+            Pharma, KFZ, Druckerei, Brandschaden, Fassade und mehr.
           </p>
         </div>
 

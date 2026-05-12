@@ -14,8 +14,8 @@ export default function CTASektion() {
           <span className="text-ice-400">Reinigung ohne Stillstand?</span>
         </h2>
         <p className="text-steel-400 max-w-xl mx-auto mb-10 leading-relaxed">
-          Fordern Sie jetzt Ihr kostenloses Angebot an. Wir melden uns innerhalb
-          von 24 Stunden – bundesweit tätig, ISO 9001 zertifiziert.
+          Kostenloses Angebot. Antwort innerhalb 24 Stunden. ISO 9001 zertifiziert,
+          bundesweit tätig.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

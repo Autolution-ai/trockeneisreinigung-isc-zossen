@@ -7,10 +7,28 @@ import Referenzen from "@/components/sections/Referenzen";
 import UeberUns from "@/components/sections/UeberUns";
 import FAQ from "@/components/sections/FAQ";
 import CTASektion from "@/components/sections/CTASektion";
+import { faqItems } from "@/lib/data/faq";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.frage,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.antwort,
+    },
+  })),
+};
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Hero />
       <TrustBar />
       <Leistungen />

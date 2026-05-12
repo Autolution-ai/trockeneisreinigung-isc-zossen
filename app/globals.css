@@ -16,7 +16,8 @@
   --color-ice-300: oklch(78% 0.10 210);
   --color-ice-100: oklch(92% 0.04 210);
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-syne);
 }
 
 * {
@@ -30,6 +31,11 @@ html {
 body {
   background: #fff;
   color: oklch(18% 0.06 243);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.font-display,
+h1, h2, h3 {
+  font-family: var(--font-syne), system-ui, sans-serif;
 }

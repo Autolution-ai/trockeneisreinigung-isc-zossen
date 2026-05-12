@@ -18,7 +18,7 @@ export default function FAQ() {
             Häufige Fragen.
           </h2>
           <p className="mt-4 text-steel-600 leading-relaxed">
-            Alles Wichtige zum Trockeneisstrahlen – von der Technik bis zum Einsatz.
+            Technik, Branchen, Maschinen: Die häufigsten Fragen zu Trockeneisstrahlen.
           </p>
         </div>
 
