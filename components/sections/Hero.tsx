@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Phone, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import DryIceFog from "./DryIceFog";
 
 const stats = [
   { wert: "−79 °C", label: "CO₂-Temperatur" },
@@ -33,6 +34,12 @@ export default function Hero() {
 
       {/* Ice glow — top right */}
       <div className="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full bg-ice-500/8 blur-[120px] pointer-events-none" />
+
+      {/* Dry ice fog */}
+      <DryIceFog />
+
+      {/* Bottom fade so text stays readable */}
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-void to-transparent pointer-events-none" />
 
       {/* Main content */}
       <div className="relative flex-1 flex items-center">
