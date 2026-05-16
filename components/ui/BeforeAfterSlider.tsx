@@ -69,18 +69,18 @@ export default function BeforeAfterSlider({ vorher, nachher, alt }: Props) {
       </div>
 
       <div
-        className="absolute inset-y-0 w-0.5 bg-white shadow-lg"
+        className="absolute inset-y-0 w-[2px] bg-white shadow-[0_0_0_1px_rgba(0,0,0,0.15)]"
         style={{ left: `${position}%` }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-xl flex items-center justify-center">
-          <GripVertical size={16} className="text-navy-900" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-2xl ring-2 ring-brand-red flex items-center justify-center">
+          <GripVertical size={18} className="text-brand-red" />
         </div>
       </div>
 
-      <div className="absolute bottom-3 left-3 px-2 py-1 bg-black/60 text-white text-xs font-semibold rounded pointer-events-none">
+      <div className="absolute top-3 left-3 px-2.5 py-1 bg-navy-950/85 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-widest rounded pointer-events-none">
         Vorher
       </div>
-      <div className="absolute bottom-3 right-3 px-2 py-1 bg-ice-500/90 text-white text-xs font-semibold rounded pointer-events-none">
+      <div className="absolute top-3 right-3 px-2.5 py-1 bg-brand-red text-white text-[10px] font-bold uppercase tracking-widest rounded pointer-events-none">
         Nachher
       </div>
     </div>

@@ -18,13 +18,20 @@
   --color-steel-100: oklch(93% 0.007 228);
   --color-steel-50: oklch(97% 0.004 228);
 
-  /* Electric ice — vivid, not muted */
-  --color-ice-600: oklch(57% 0.22 210);
-  --color-ice-500: oklch(67% 0.24 210);
-  --color-ice-400: oklch(75% 0.20 210);
-  --color-ice-300: oklch(83% 0.15 210);
-  --color-ice-100: oklch(94% 0.05 210);
-  --color-ice-50: oklch(97% 0.02 210);
+  /* Ice / Brand-Blue — calibrated to #289DCC */
+  --color-ice-700: oklch(48% 0.13 230);
+  --color-ice-600: oklch(56% 0.14 230);
+  --color-ice-500: oklch(63% 0.14 230);
+  --color-ice-400: oklch(72% 0.12 230);
+  --color-ice-300: oklch(81% 0.09 230);
+  --color-ice-100: oklch(93% 0.04 230);
+  --color-ice-50: oklch(97% 0.015 230);
+
+  /* Brand Red — calibrated to #FF0033 (primary CTA) */
+  --color-brand-red: oklch(60% 0.27 22);
+  --color-brand-red-hover: oklch(54% 0.27 22);
+  --color-brand-red-dark: oklch(46% 0.24 22);
+  --color-brand-red-soft: oklch(94% 0.05 22);
 
   --font-sans: var(--font-dm-sans);
   --font-display: var(--font-syne);

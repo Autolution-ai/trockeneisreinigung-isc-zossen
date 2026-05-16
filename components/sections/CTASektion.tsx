@@ -39,7 +39,7 @@ export default function CTASektion() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href="/kontakt"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-ice-500 text-white font-bold rounded-sm hover:bg-ice-400 transition-colors text-sm tracking-wide"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-red text-white font-bold rounded-sm hover:bg-brand-red-hover transition-colors text-sm tracking-wide"
           >
             Angebot anfragen
             <ArrowRight size={15} />

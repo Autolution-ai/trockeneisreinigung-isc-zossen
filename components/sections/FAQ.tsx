@@ -43,7 +43,7 @@ export default function FAQ() {
                     {item.frage}
                   </span>
                   <div className={`w-6 h-6 rounded-sm flex items-center justify-center flex-shrink-0 transition-colors ${
-                    open === i ? "bg-ice-500 text-white" : "bg-steel-100 text-steel-400"
+                    open === i ? "bg-brand-red text-white" : "bg-steel-100 text-steel-400"
                   }`}>
                     {open === i ? <Minus size={13} /> : <Plus size={13} />}
                   </div>

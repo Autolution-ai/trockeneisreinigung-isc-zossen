@@ -306,58 +306,76 @@ export default function LeistungenPage() {
         </div>
       </div>
 
-      {/* Editorial sections */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div className="space-y-28">
-          {leistungen.map((item, i) => {
-            const Icon = iconMap[item.icon];
-            const d = details[item.id];
-            const isEven = i % 2 === 0;
-            const accentVisual = item.highlight;
+      {/* Editorial sections — alternating dark/light for clear separation */}
+      <div>
+        {leistungen.map((item, i) => {
+          const Icon = iconMap[item.icon];
+          const d = details[item.id];
+          const isEven = i % 2 === 0;
+          const dark = i % 2 === 1;
 
-            return (
-              <section key={item.id} id={item.id} className="scroll-mt-24">
+          const bgWrap = dark ? "bg-navy-950" : "bg-white";
+          const titleColor = dark ? "text-white" : "text-navy-950";
+          const bodyColor = dark ? "text-steel-300" : "text-steel-600";
+          const indexColor = dark ? "text-white/15" : "text-steel-200";
+          const labelColor = dark ? "text-ice-400" : "text-ice-600";
+          const chipBg = dark ? "bg-white/10" : "bg-navy-950";
+          const chipIcon = dark ? "text-ice-400" : "text-ice-400";
+          const specCellBg = dark ? "bg-navy-900" : "bg-white";
+          const specBorder = dark ? "bg-white/10 border-white/10" : "bg-steel-200 border-steel-200";
+          const specLabel = dark ? "text-steel-400" : "text-steel-500";
+          const specValue = dark ? "text-white" : "text-navy-950";
+          const tagBg = dark
+            ? "bg-white/5 border-white/10 text-steel-300"
+            : "bg-steel-50 border-steel-200 text-steel-700";
+          const ctaBg = dark ? "bg-ice-500 hover:bg-ice-400" : "bg-navy-950 hover:bg-navy-800";
+          const phoneText = dark ? "text-white hover:text-ice-400" : "text-navy-950 hover:text-ice-600";
+
+          return (
+            <section
+              key={item.id}
+              id={item.id}
+              className={`scroll-mt-24 ${bgWrap} py-24`}
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-                  {/* Text column */}
                   <div className={`lg:col-span-7 ${!isEven ? "lg:order-2" : ""}`}>
                     <div className="flex items-baseline gap-4 mb-6">
-                      <span className="font-display text-5xl sm:text-6xl font-black text-steel-200 leading-none tracking-tighter">
+                      <span className={`font-display text-5xl sm:text-6xl font-black leading-none tracking-tighter ${indexColor}`}>
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-md bg-navy-950 flex items-center justify-center">
-                          {Icon && <Icon size={16} className="text-ice-400" />}
+                        <div className={`w-8 h-8 rounded-md flex items-center justify-center ${chipBg}`}>
+                          {Icon && <Icon size={16} className={chipIcon} />}
                         </div>
-                        <span className="text-xs font-semibold text-ice-600 uppercase tracking-widest">
+                        <span className={`text-xs font-semibold uppercase tracking-widest ${labelColor}`}>
                           {item.titel}
                         </span>
                       </div>
                     </div>
 
-                    <h2 className="font-display text-3xl sm:text-5xl font-black text-navy-950 leading-[1] tracking-tight">
+                    <h2 className={`font-display text-3xl sm:text-5xl font-black leading-[1] tracking-tight ${titleColor}`}>
                       {d.claim}
                     </h2>
 
-                    <p className="mt-6 text-steel-600 leading-relaxed max-w-xl">{d.info}</p>
+                    <p className={`mt-6 leading-relaxed max-w-xl ${bodyColor}`}>{d.info}</p>
 
-                    {/* Spec grid */}
-                    <div className="mt-8 grid grid-cols-2 gap-px bg-steel-200 border border-steel-200 rounded-lg overflow-hidden max-w-xl">
+                    <div className={`mt-8 grid grid-cols-2 gap-px border rounded-lg overflow-hidden max-w-xl ${specBorder}`}>
                       {d.specs.map((s) => (
-                        <div key={s.label} className="bg-white px-4 py-3.5">
-                          <div className="text-[10px] uppercase tracking-widest text-steel-500 font-semibold">
+                        <div key={s.label} className={`px-4 py-3.5 ${specCellBg}`}>
+                          <div className={`text-[10px] uppercase tracking-widest font-semibold ${specLabel}`}>
                             {s.label}
                           </div>
-                          <div className="mt-1 text-sm font-bold text-navy-950">{s.value}</div>
+                          <div className={`mt-1 text-sm font-bold ${specValue}`}>{s.value}</div>
                         </div>
                       ))}
                     </div>
 
-                    {/* Inline punkte as compact tags */}
                     <ul className="mt-6 flex flex-wrap gap-2 max-w-xl">
                       {d.punkte.map((p) => (
                         <li
                           key={p}
-                          className="text-xs text-steel-700 bg-steel-50 border border-steel-200 rounded-full px-3 py-1.5 leading-snug"
+                          className={`text-xs border rounded-full px-3 py-1.5 leading-snug ${tagBg}`}
                         >
                           {p}
                         </li>
@@ -367,14 +385,14 @@ export default function LeistungenPage() {
                     <div className="mt-8 flex gap-3 flex-wrap">
                       <Link
                         href="/kontakt"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-navy-950 text-white text-sm font-semibold rounded-md hover:bg-navy-800 transition-colors"
+                        className={`inline-flex items-center gap-2 px-5 py-2.5 text-white text-sm font-semibold rounded-md transition-colors ${ctaBg}`}
                       >
                         Angebot anfragen
                         <ArrowRight size={14} />
                       </Link>
                       <a
                         href="tel:+493377202730"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 text-navy-950 text-sm font-semibold hover:text-ice-600 transition-colors"
+                        className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold transition-colors ${phoneText}`}
                       >
                         <Phone size={14} />
                         03377 202730
@@ -382,15 +400,14 @@ export default function LeistungenPage() {
                     </div>
                   </div>
 
-                  {/* Visual column */}
                   <div className={`lg:col-span-5 ${!isEven ? "lg:order-1" : ""}`}>
-                    <Visual kind={d.visual} accent={accentVisual} />
+                    <Visual kind={d.visual} accent={!dark} />
                   </div>
                 </div>
-              </section>
-            );
-          })}
-        </div>
+              </div>
+            </section>
+          );
+        })}
       </div>
 
       {/* Ablauf timeline */}
@@ -425,7 +442,7 @@ export default function LeistungenPage() {
           <div className="flex gap-3 flex-shrink-0">
             <Link
               href="/kontakt"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-ice-500 text-white font-semibold rounded-md hover:bg-ice-400 transition-colors text-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-brand-red text-white font-semibold rounded-md hover:bg-brand-red-hover transition-colors text-sm"
             >
               Jetzt anfragen
               <ArrowRight size={14} />

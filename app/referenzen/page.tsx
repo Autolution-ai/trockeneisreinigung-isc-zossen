@@ -50,7 +50,7 @@ export default function ReferenzenPage() {
           </p>
           <Link
             href="/kontakt"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-ice-500 text-white font-bold rounded-md hover:bg-ice-400 transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-red text-white font-bold rounded-md hover:bg-brand-red-hover transition-colors"
           >
             Kostenloses Angebot anfragen
             <ArrowRight size={15} />

@@ -134,7 +134,7 @@ export default function Footer() {
             <div className="mt-6">
               <Link
                 href="/kontakt"
-                className="inline-block px-4 py-2 bg-ice-500 text-white text-sm font-semibold rounded-md hover:bg-ice-400 transition-colors"
+                className="inline-block px-4 py-2 bg-brand-red text-white text-sm font-semibold rounded-md hover:bg-brand-red-hover transition-colors"
               >
                 Jetzt anfragen
               </Link>

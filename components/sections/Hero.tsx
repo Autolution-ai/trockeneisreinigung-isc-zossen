@@ -172,7 +172,7 @@ export default function Hero() {
                   <motion.div {...fade(0.3)} className="flex flex-col sm:flex-row gap-3">
                     <Link
                       href="/kontakt"
-                      className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-ice-500 text-white font-bold rounded-sm hover:bg-ice-400 transition-colors text-sm tracking-wide"
+                      className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-brand-red text-white font-bold rounded-sm hover:bg-brand-red-hover transition-colors text-sm tracking-wide"
                     >
                       Kostenloses Angebot
                       <ArrowRight size={15} />

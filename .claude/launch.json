@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "isc-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev", "--port", "3010"],
+      "port": 3010,
+      "autoPort": false
     }
   ]
 }

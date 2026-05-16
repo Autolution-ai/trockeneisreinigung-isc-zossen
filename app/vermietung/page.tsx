@@ -211,7 +211,7 @@ export default function VermietungPage() {
             <div className="flex gap-3 flex-shrink-0">
               <Link
                 href="/kontakt"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-ice-500 text-white text-sm font-semibold rounded-md hover:bg-ice-400 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-red text-white text-sm font-semibold rounded-md hover:bg-brand-red-hover transition-colors"
               >
                 Anfrage senden
                 <ArrowRight size={14} />

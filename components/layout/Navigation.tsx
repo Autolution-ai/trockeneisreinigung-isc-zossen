@@ -70,7 +70,7 @@ export default function Navigation() {
             </a>
             <Link
               href="/kontakt"
-              className="px-4 py-2 bg-ice-500 text-white text-sm font-semibold rounded-sm hover:bg-ice-400 transition-colors tracking-wide"
+              className="px-4 py-2 bg-brand-red text-white text-sm font-semibold rounded-sm hover:bg-brand-red-hover transition-colors tracking-wide"
             >
               Anfragen
             </Link>
@@ -112,7 +112,7 @@ export default function Navigation() {
               <Link
                 href="/kontakt"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-3 bg-ice-500 text-white text-sm font-semibold rounded-sm text-center"
+                className="block px-4 py-3 bg-brand-red text-white text-sm font-semibold rounded-sm text-center"
               >
                 Kostenloses Angebot anfragen
               </Link>

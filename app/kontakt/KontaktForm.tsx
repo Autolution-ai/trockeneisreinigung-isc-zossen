@@ -107,7 +107,7 @@ export default function KontaktForm() {
                 <label className="block text-xs font-semibold text-navy-900 mb-1.5">Ihre Anfrage *</label>
                 <textarea name="nachricht" required rows={5} placeholder="Was soll gereinigt werden, welche Fläche, welcher Zeitraum?" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-sm focus:outline-none focus:border-ice-400 transition-colors resize-none" />
               </div>
-              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-ice-500 text-white font-bold rounded-md hover:bg-ice-400 transition-colors text-sm">
+              <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-bold rounded-md hover:bg-brand-red-hover transition-colors text-sm">
                 Anfrage absenden
                 <ArrowRight size={15} />
               </button>
