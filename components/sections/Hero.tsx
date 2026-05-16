@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { Phone, ArrowRight, ChevronDown } from "lucide-react";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import DryIceFog from "./DryIceFog";
 
 const stats = [
@@ -22,32 +22,77 @@ const fade = (delay = 0) => ({
 
 const VIDEO_SRC = "/dry-ice-fog.mp4";
 
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const clamp01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
+const ramp = (v: number, a: number, b: number) =>
+  clamp01((v - a) / (b - a));
+
 export default function Hero() {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLDivElement>(null);
   const [videoFailed, setVideoFailed] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ["start start", "end end"],
-  });
+  useEffect(() => {
+    let raf = 0;
+    let lastProgress = -1;
 
-  // Sync video.currentTime with scroll progress (0 → duration)
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const video = videoRef.current;
-    if (!video || !videoReady || !video.duration || isNaN(video.duration)) return;
-    const t = Math.max(0, Math.min(v, 0.999)) * video.duration;
-    if (Math.abs(video.currentTime - t) > 0.03) {
-      video.currentTime = t;
-    }
-  });
+    const update = () => {
+      raf = 0;
+      const section = wrapperRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      const progress = clamp01(-rect.top / Math.max(1, scrollable));
+      if (Math.abs(progress - lastProgress) < 0.001) return;
+      lastProgress = progress;
 
-  const textOpacity = useTransform(scrollYProgress, [0, 0.55, 0.85], [1, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.85], [0, -60]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.18]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.45, 0.55, 0.75]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+      // Video scrub
+      const v = videoRef.current;
+      if (v && v.readyState >= 2 && v.duration && !isNaN(v.duration)) {
+        const t = Math.min(progress, 0.999) * v.duration;
+        if (Math.abs(v.currentTime - t) > 0.03) v.currentTime = t;
+      }
+
+      // Content fade + lift
+      const c = contentRef.current;
+      if (c) {
+        const op = 1 - ramp(progress, 0.55, 0.85);
+        const y = lerp(0, -60, ramp(progress, 0, 0.85));
+        c.style.opacity = String(op);
+        c.style.transform = `translateY(${y}px)`;
+      }
+
+      // Overlay deepening
+      const o = overlayRef.current;
+      if (o) {
+        const op = lerp(0.45, 0.75, progress);
+        o.style.opacity = String(op);
+      }
+
+      // Hint fade
+      const h = hintRef.current;
+      if (h) {
+        const op = 1 - ramp(progress, 0, 0.2);
+        h.style.opacity = String(op);
+      }
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <section
@@ -55,30 +100,22 @@ export default function Hero() {
       className="relative bg-void"
       style={{ height: "220vh" }}
     >
-      {/* Pinned sticky inner */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-void">
-        {/* Video background — scroll-scrubbed */}
         {!videoFailed && (
-          <motion.video
+          <video
             ref={videoRef}
             src={VIDEO_SRC}
             muted
             playsInline
             preload="auto"
-            // @ts-expect-error — disablePictureInPicture is valid HTML attr
-            disablePictureInPicture
-            onLoadedData={() => setVideoReady(true)}
             onError={() => setVideoFailed(true)}
-            style={{ scale: videoScale }}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover scale-105"
             aria-hidden
           />
         )}
 
-        {/* Canvas fog — fallback / extra depth layer */}
-        {(videoFailed || !videoReady) && <DryIceFog />}
+        {videoFailed && <DryIceFog />}
 
-        {/* Dot grid texture */}
         <div
           className="absolute inset-0 opacity-[0.06] pointer-events-none"
           style={{
@@ -87,22 +124,20 @@ export default function Hero() {
           }}
         />
 
-        {/* Ice glow — top right */}
         <div className="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full bg-ice-500/8 blur-[120px] pointer-events-none" />
 
-        {/* Dark overlay for legibility (deepens on scroll) */}
-        <motion.div
-          style={{ opacity: overlayOpacity }}
+        <div
+          ref={overlayRef}
           className="absolute inset-0 bg-void pointer-events-none"
+          style={{ opacity: 0.45 }}
         />
 
-        {/* Bottom fade */}
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-void to-transparent pointer-events-none" />
 
-        {/* Content */}
-        <motion.div
-          style={{ opacity: textOpacity, y: textY }}
+        <div
+          ref={contentRef}
           className="relative h-full flex flex-col pt-16"
+          style={{ opacity: 1, transform: "translateY(0px)" }}
         >
           <div className="flex-1 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
@@ -175,7 +210,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Stats row */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -198,12 +232,12 @@ export default function Hero() {
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
-        {/* Scroll hint */}
-        <motion.div
-          style={{ opacity: hintOpacity }}
+        <div
+          ref={hintRef}
           className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-ice-400/80 pointer-events-none"
+          style={{ opacity: 1 }}
         >
           <span className="text-[10px] uppercase tracking-[0.25em] font-semibold">Scroll</span>
           <motion.div
@@ -212,7 +246,7 @@ export default function Hero() {
           >
             <ChevronDown size={18} strokeWidth={1.5} />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
