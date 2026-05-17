@@ -18,106 +18,68 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 type Tone = "dark" | "ice" | "light";
-type Pattern = "pellets" | "diagonals" | "rings" | "mesh" | "stack" | "duration";
 
-const layout: { span: string; rowSpan?: string; tone: Tone; pattern: Pattern; cta: string }[] = [
-  // Trockeneisreinigung — flagship
-  { span: "lg:col-span-2", rowSpan: "lg:row-span-2", tone: "dark", pattern: "pellets", cta: "Verfahren ansehen" },
-  // Sandstrahlen
-  { span: "lg:col-span-1", tone: "ice", pattern: "diagonals", cta: "Mehr erfahren" },
-  // Soda-Strahlen
-  { span: "lg:col-span-1", tone: "light", pattern: "rings", cta: "Mehr erfahren" },
-  // Sponge-Jet
-  { span: "lg:col-span-2", tone: "dark", pattern: "mesh", cta: "Verfahren ansehen" },
-  // Verkauf
-  { span: "lg:col-span-1", tone: "light", pattern: "stack", cta: "Zum Verkauf" },
-  // Vermietung
-  { span: "lg:col-span-1", tone: "ice", pattern: "duration", cta: "Zur Vermietung" },
+type CardCfg = {
+  span: string;
+  rowSpan?: string;
+  tone: Tone;
+  image: string;
+  imageFocus?: string; // object-position
+  cta: string;
+};
+
+// 4-col grid · 3 rows · all cells filled
+//  Row 1: [Trockeneis 2×2          ] [Sandstrahlen 2×1   ]
+//  Row 2: [Trockeneis cont.        ] [Soda 1×1][Sponge 1×1]
+//  Row 3: [Verkauf 2×1   ] [Vermietung 2×1]
+const layout: CardCfg[] = [
+  {
+    span: "lg:col-span-2",
+    rowSpan: "lg:row-span-2",
+    tone: "dark",
+    image: "/leistungen/motor.jpg",
+    imageFocus: "object-right",
+    cta: "Verfahren ansehen",
+  },
+  {
+    span: "lg:col-span-2",
+    tone: "dark",
+    image:
+      "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1400&q=80",
+    imageFocus: "object-center",
+    cta: "Mehr erfahren",
+  },
+  {
+    span: "lg:col-span-1",
+    tone: "light",
+    image: "/leistungen/restauration.jpg",
+    imageFocus: "object-right",
+    cta: "Mehr erfahren",
+  },
+  {
+    span: "lg:col-span-1",
+    tone: "dark",
+    image: "/leistungen/kleber.jpg",
+    imageFocus: "object-right",
+    cta: "Mehr erfahren",
+  },
+  {
+    span: "lg:col-span-2",
+    tone: "dark",
+    image:
+      "https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1400&q=80",
+    imageFocus: "object-center",
+    cta: "Zum Verkauf",
+  },
+  {
+    span: "lg:col-span-2",
+    tone: "ice",
+    image:
+      "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=1400&q=80",
+    imageFocus: "object-center",
+    cta: "Zur Vermietung",
+  },
 ];
-
-function Pattern({ kind, tone }: { kind: Pattern; tone: Tone }) {
-  const dark = tone === "dark";
-  const ice = tone === "ice";
-  const color = dark
-    ? "rgba(255,255,255,0.18)"
-    : ice
-      ? "rgba(255,255,255,0.4)"
-      : "oklch(85% 0.012 228)";
-
-  if (kind === "pellets") {
-    return (
-      <div
-        className="absolute inset-0 opacity-50 pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle, ${color} 1.4px, transparent 1.7px)`,
-          backgroundSize: "26px 26px",
-        }}
-      />
-    );
-  }
-  if (kind === "diagonals") {
-    return (
-      <div
-        className="absolute inset-0 opacity-40 pointer-events-none"
-        style={{
-          backgroundImage: `repeating-linear-gradient(135deg, ${color} 0 1px, transparent 1px 14px)`,
-        }}
-      />
-    );
-  }
-  if (kind === "rings") {
-    return (
-      <div className="absolute inset-0 opacity-50 pointer-events-none overflow-hidden">
-        <div
-          className="absolute -bottom-20 -right-12 w-80 h-80 rounded-full border"
-          style={{ borderColor: color }}
-        />
-        <div
-          className="absolute -bottom-10 -right-4 w-48 h-48 rounded-full border"
-          style={{ borderColor: color }}
-        />
-      </div>
-    );
-  }
-  if (kind === "mesh") {
-    return (
-      <div
-        className="absolute inset-0 opacity-30 pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(${color} 1px, transparent 1px), linear-gradient(90deg, ${color} 1px, transparent 1px)`,
-          backgroundSize: "24px 24px",
-        }}
-      />
-    );
-  }
-  if (kind === "stack") {
-    return (
-      <div className="absolute right-5 bottom-5 flex flex-col gap-1.5 opacity-30 pointer-events-none">
-        {["IceTech", "Schmidt", "KAESER"].map((b) => (
-          <div
-            key={b}
-            className="font-display text-[11px] font-black tracking-tight text-navy-950"
-          >
-            {b}
-          </div>
-        ))}
-      </div>
-    );
-  }
-  if (kind === "duration") {
-    return (
-      <div className="absolute right-5 bottom-5 grid grid-cols-5 gap-1 opacity-50 pointer-events-none">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <div
-            key={i}
-            className={`w-2.5 h-2.5 rounded-[2px] ${i < 5 ? "bg-white" : "bg-white/40"}`}
-          />
-        ))}
-      </div>
-    );
-  }
-  return null;
-}
 
 export default function Leistungen() {
   return (
@@ -152,32 +114,33 @@ export default function Leistungen() {
             const dark = cfg.tone === "dark";
             const ice = cfg.tone === "ice";
 
-            const bg = dark
-              ? "bg-navy-950"
-              : ice
-                ? "bg-ice-500"
-                : "bg-white border border-steel-200";
-
-            const titleColor = dark || ice ? "text-white" : "text-navy-950";
-            const subColor = dark ? "text-steel-300" : ice ? "text-white/90" : "text-steel-600";
-            const indexColor = dark ? "text-white/30" : ice ? "text-white/60" : "text-steel-300";
             const iconBg = dark
-              ? "bg-white/10 group-hover:bg-brand-red"
+              ? "bg-white/15 group-hover:bg-brand-red"
               : ice
-                ? "bg-white/20 group-hover:bg-brand-red"
-                : "bg-steel-100 group-hover:bg-brand-red";
+                ? "bg-white/25 group-hover:bg-brand-red"
+                : "bg-white/90 group-hover:bg-brand-red";
             const iconColor = dark
-              ? "text-ice-400 group-hover:text-white"
+              ? "text-white group-hover:text-white"
               : ice
                 ? "text-white"
                 : "text-navy-950 group-hover:text-white";
-            const ctaColor = dark
-              ? "text-ice-400 group-hover:text-white"
+            const titleColor = "text-white";
+            const subColor = "text-white/85";
+            const indexColor = dark
+              ? "text-white/40"
               : ice
-                ? "text-white"
-                : "text-brand-red";
+                ? "text-white/70"
+                : "text-white/70";
+            const ctaColor = "text-white";
 
-            const isFlagship = cfg.rowSpan;
+            // Overlay strength — different tints per tone
+            const overlay = dark
+              ? "from-navy-950 via-navy-950/85 to-navy-950/50"
+              : ice
+                ? "from-ice-600 via-ice-600/80 to-ice-500/40"
+                : "from-navy-950/90 via-navy-950/70 to-navy-950/30";
+
+            const isFlagship = !!cfg.rowSpan;
 
             return (
               <motion.div
@@ -190,60 +153,71 @@ export default function Leistungen() {
               >
                 <Link
                   href={item.href}
-                  className={`group relative overflow-hidden rounded-2xl p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${bg}`}
+                  className="group relative block overflow-hidden rounded-2xl h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
-                  <Pattern kind={cfg.pattern} tone={cfg.tone} />
+                  {/* Background image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={cfg.image}
+                    alt=""
+                    aria-hidden
+                    className={`absolute inset-0 w-full h-full object-cover ${cfg.imageFocus ?? "object-center"} transition-transform duration-700 group-hover:scale-105`}
+                  />
 
-                  {/* Top row: icon + index */}
-                  <div className="relative flex items-start justify-between">
-                    <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${iconBg}`}
-                    >
-                      {Icon && (
-                        <Icon size={22} className={`transition-colors ${iconColor}`} />
-                      )}
+                  {/* Tinted gradient overlay */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-tr ${overlay}`}
+                  />
+
+                  {/* Content */}
+                  <div className="relative h-full p-6 sm:p-7 flex flex-col justify-between">
+                    <div className="flex items-start justify-between">
+                      <div
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors backdrop-blur-sm ${iconBg}`}
+                      >
+                        {Icon && (
+                          <Icon size={22} className={`transition-colors ${iconColor}`} />
+                        )}
+                      </div>
+                      <span
+                        className={`font-display text-xs font-black tracking-widest ${indexColor}`}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
                     </div>
-                    <span
-                      className={`font-display text-xs font-black tracking-widest ${indexColor}`}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+
+                    <div>
+                      <h3
+                        className={`font-display font-black tracking-tight leading-[1.05] drop-shadow-sm ${titleColor} ${isFlagship ? "text-3xl sm:text-4xl" : "text-xl sm:text-2xl"}`}
+                      >
+                        {item.titel}
+                      </h3>
+                      <p
+                        className={`mt-3 leading-relaxed drop-shadow-sm ${subColor} ${isFlagship ? "text-base max-w-md" : "text-sm line-clamp-2"}`}
+                      >
+                        {item.kurz}
+                      </p>
+
+                      <div
+                        className={`mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest ${ctaColor}`}
+                      >
+                        <span>{cfg.cta}</span>
+                        <ArrowUpRight
+                          size={14}
+                          className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Title + description */}
-                  <div className="relative mt-6">
-                    <h3
-                      className={`font-display font-black tracking-tight leading-[1.05] ${titleColor} ${isFlagship ? "text-3xl sm:text-4xl" : "text-xl"}`}
-                    >
-                      {item.titel}
-                    </h3>
-                    <p
-                      className={`mt-3 leading-relaxed ${subColor} ${isFlagship ? "text-base max-w-md" : "text-sm line-clamp-2"}`}
-                    >
-                      {item.kurz}
-                    </p>
-
-                    {/* Click CTA — always visible */}
-                    <div
-                      className={`mt-5 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest transition-all ${ctaColor}`}
-                    >
-                      <span>{cfg.cta}</span>
-                      <ArrowUpRight
-                        size={14}
-                        className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Hover border accent — red glow signaling click */}
-                  <div className="absolute inset-0 rounded-2xl ring-0 group-hover:ring-2 group-hover:ring-brand-red/50 transition-all pointer-events-none" />
+                  {/* Red glow on hover */}
+                  <div className="absolute inset-0 rounded-2xl ring-0 group-hover:ring-2 group-hover:ring-brand-red transition-all pointer-events-none" />
                 </Link>
               </motion.div>
             );
           })}
         </div>
 
-        {/* Footer hint */}
         <p className="mt-6 text-xs text-steel-500 text-center">
           → Jede Karte ist klickbar und führt zur detaillierten Leistungsbeschreibung
         </p>
