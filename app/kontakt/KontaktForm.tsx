@@ -89,23 +89,23 @@ export default function KontaktForm() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-navy-900 mb-1.5">Name *</label>
-                  <input name="name" required placeholder="Max Mustermann" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-sm focus:outline-none focus:border-ice-400 transition-colors" />
+                  <input name="name" required placeholder="Max Mustermann" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-base sm:text-sm focus:outline-none focus:border-ice-400 transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-navy-900 mb-1.5">Firma</label>
-                  <input name="firma" placeholder="Musterfirma GmbH" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-sm focus:outline-none focus:border-ice-400 transition-colors" />
+                  <input name="firma" placeholder="Musterfirma GmbH" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-base sm:text-sm focus:outline-none focus:border-ice-400 transition-colors" />
                 </div>
               </div>
               <div>
                 <label className="block text-xs font-semibold text-navy-900 mb-1.5">Telefon</label>
-                <input name="tel" type="tel" placeholder="+49 30 123456" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-sm focus:outline-none focus:border-ice-400 transition-colors" />
+                <input name="tel" type="tel" placeholder="+49 30 123456" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-base sm:text-sm focus:outline-none focus:border-ice-400 transition-colors" />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-navy-900 mb-1.5">Ihre Anfrage *</label>
-                <textarea name="nachricht" required rows={5} placeholder="Was soll gereinigt werden, welche Fläche, welcher Zeitraum?" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-sm focus:outline-none focus:border-ice-400 transition-colors resize-none" />
+                <textarea name="nachricht" required rows={5} placeholder="Was soll gereinigt werden, welche Fläche, welcher Zeitraum?" className="w-full px-4 py-2.5 border border-steel-200 rounded-lg text-base sm:text-sm focus:outline-none focus:border-ice-400 transition-colors resize-none" />
               </div>
               <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-red text-white font-bold rounded-md hover:bg-brand-red-hover transition-colors text-sm">
                 Anfrage absenden

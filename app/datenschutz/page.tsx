@@ -23,7 +23,7 @@ export default function DatenschutzPage() {
 
         <div>
           <h2 className="text-lg font-bold text-navy-950 mb-3">2. Hosting</h2>
-          <p>Diese Website wird bei Vercel Inc., 340 Pine Street, Suite 700, San Francisco, California 94104, USA gehostet. Details entnehmen Sie der Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" className="text-ice-500 hover:text-ice-400" target="_blank" rel="noopener noreferrer">https://vercel.com/legal/privacy-policy</a>.</p>
+          <p>Diese Website wird bei Vercel Inc., 340 Pine Street, Suite 700, San Francisco, California 94104, USA gehostet. Details entnehmen Sie der Datenschutzerklärung von Vercel: <a href="https://vercel.com/legal/privacy-policy" className="text-ice-500 hover:text-ice-400 break-words" target="_blank" rel="noopener noreferrer">https://vercel.com/legal/privacy-policy</a>.</p>
         </div>
 
         <div>

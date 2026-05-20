@@ -29,7 +29,7 @@ export default function Vorteile() {
         </div>
 
         {/* Big stats */}
-        <div className="grid grid-cols-3 border border-steel-200 rounded-sm mb-16 bg-white overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-3 border border-steel-200 rounded-sm mb-16 bg-white overflow-hidden divide-y sm:divide-y-0 divide-steel-200">
           {bigStats.map(({ wert, sub }, i) => (
             <motion.div
               key={sub}
@@ -37,7 +37,7 @@ export default function Vorteile() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`py-8 px-6 text-center ${i < 2 ? "border-r border-steel-200" : ""}`}
+              className={`py-8 px-6 text-center ${i < 2 ? "sm:border-r sm:border-steel-200" : ""}`}
             >
               <div className="font-display text-3xl sm:text-4xl font-black text-navy-950">{wert}</div>
               <div className="text-xs text-steel-500 mt-2 leading-snug">{sub}</div>

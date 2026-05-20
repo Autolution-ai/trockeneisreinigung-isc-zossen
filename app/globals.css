@@ -53,7 +53,11 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* clip (not hidden) prevents stray horizontal scroll without breaking position: sticky */
+  overflow-x: clip;
+}
 
 body {
   background: #fff;
@@ -61,6 +65,7 @@ body {
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 h1, h2, h3, h4 {

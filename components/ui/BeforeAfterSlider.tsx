@@ -40,7 +40,7 @@ export default function BeforeAfterSlider({ vorher, nachher, alt }: Props) {
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] overflow-hidden rounded-xl select-none cursor-col-resize"
+      className="relative w-full aspect-[4/3] overflow-hidden rounded-xl select-none cursor-col-resize touch-pan-y"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
